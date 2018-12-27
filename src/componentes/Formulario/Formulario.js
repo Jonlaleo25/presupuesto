@@ -23,6 +23,8 @@ class Formulario extends React.Component{
 
         // agregarlo con props this.props.
 
+        this.props.agregarGasto(gasto);
+
         // regresar el formulario opcional
         e.currentTarget.reset();
 
