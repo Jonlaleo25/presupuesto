@@ -57,6 +57,11 @@ class App extends Component {
       gastos[`gasto${Date.now()}`] = gasto
 
       console.log("Gasto al objeto : ", gastos);
+
+
+      // restar presupuesto 
+      console.log(gasto);
+      this.restarPresupuesto(gasto.cantidadGasto)
       
     // poner el state
 
@@ -64,7 +69,30 @@ class App extends Component {
       gastos:gastos
     })
 
-  
+  }
+
+  // restar del presupuesto cuando un gasto se crea 
+  restarPresupuesto = cantidad =>{
+    // leer el gasto 
+
+    console.log('El gasto agregado ' + cantidad);
+   // convirtes string a valor numerico
+    let restar = Number(cantidad);
+
+    // tomar una copia del state
+    let restante  = this.state.restante;
+
+     // lo restamos 
+      restante-= restar 
+       console.log("restante : ", restante);
+      
+
+    //agregamos el nuevo state
+       this.setState({
+         restante
+       })
+    
+    
   }
 
   render() {
