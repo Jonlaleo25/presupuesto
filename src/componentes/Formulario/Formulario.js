@@ -1,36 +1,33 @@
-import React from 'react'
+import React from 'react';
 
 class Formulario extends React.Component{
 
-    // resf para los camops de los formulario 
+    // se crear os refs para que cada campo lea los dato que el usuario este ingresando 
+    nombreGasto = React.createRef();
+    cantidadGasto = React.createRef();
 
-    nombreGastoRef = React.createRef();
-    cantidaGastodRef    = React.createRef(); 
+    crearGasto= e =>{
 
-    crearGasto = (e) =>{
+        //Prevenir el default 
 
-        // prevenir el default
         e.preventDefault();
 
-        // crear el objeto con los datos
-        const gasto = {
+        // creal el objeto con los datos 
 
-            nombreGasto : this.nombreGastoRef.current.value,
-            cantidadGasto : this.cantidaGastodRef.current.value,
+        const gasto ={
+            nombreGasto   : this.nombreGasto.current.value,
+            cantidadGasto : this.cantidadGasto.current.value
         }
-        console.log(gasto);
+        console.log("Envia por parte del Hijo", gasto);
         
 
-        // agregarlo con props this.props.
-
+        // agregar u y enviar con this.props.
+        
         this.props.agregarGasto(gasto);
 
-        // regresar el formulario opcional
+        //resetear el formulario (opcional )
         e.currentTarget.reset();
-
-
-
-
+        
     }
 
     render(){
@@ -39,7 +36,8 @@ class Formulario extends React.Component{
                 <h2>Agrega tus gastos aqui</h2>
                 <div className="campo">
                     <label>Nombre Gasto</label>
-                    <input  ref={this.nombreGastoRef}
+
+                    <input ref={this.nombreGasto} 
                            className="u-full-width" 
                            type="text" 
                            placeholder="Ej. Transporte" />
@@ -47,7 +45,8 @@ class Formulario extends React.Component{
 
                 <div className="campo">
                     <label>Cantidad</label>
-                    <input ref={this.cantidaGastodRef} 
+
+                    <input ref={this.cantidadGasto} 
                            className="u-full-width" 
                            type="text" 
                            placeholder="Ej. 300" />
@@ -57,5 +56,7 @@ class Formulario extends React.Component{
             </form>
         )
     }
+
 }
+
 export default Formulario;
