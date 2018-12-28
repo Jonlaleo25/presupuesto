@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import '../css/App.css';
 import Header from './Header/Header';
 import Formulario from './Formulario/Formulario';
- import Listado from './Listado/Listado';
+import Listado from './Listado/Listado';
+import ControlPresupuesto from './ControlPresupuesto/ControlPresuuesto';
+import {validarPresupuesto} from '../helper';
+
 
 class App extends Component {
 
@@ -11,6 +14,32 @@ class App extends Component {
     presupuesto: '',
     restante: '',
     gastos:{}
+  }
+
+  componentDidMount(){
+
+   this.obtenerPresupuesto();
+    
+  }
+
+  obtenerPresupuesto = () =>{
+
+    let presupuesto = prompt('Cual es el presupuesto ? ');
+
+    let resultado = validarPresupuesto(presupuesto);
+
+    if(resultado ){
+      //console.log('Valido');
+      this.setState({
+        presupuesto: presupuesto,
+        restante : presupuesto
+      })
+      
+    }else{
+      this.obtenerPresupuesto();
+      
+    }
+
   }
 
   // agregar uel metodo de agrrgar nuevo gasto
@@ -32,7 +61,7 @@ class App extends Component {
     // poner el state
 
     this.setState({
-      gastos
+      gastos:gastos
     })
 
   
@@ -56,6 +85,12 @@ class App extends Component {
                   <Listado 
 
                     gastos = {this.state.gastos}
+                  />
+                  <ControlPresupuesto 
+
+                    presupuesto = {this.state.presupuesto}
+                    restante    = {this.state.restante}
+                  
                   />
                </div>
              </div>
